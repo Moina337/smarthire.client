@@ -1,0 +1,67 @@
+<section class="bg-gray-50 min-h-screen p-6">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- PROFILE (Une seule lecture du Signal ici suffit) -->
+    @if(profile(); as data) {
+      <div class="bg-white rounded-2xl shadow p-8">
+
+        <!-- HEADER -->
+        <div class="flex items-center gap-6">
+          <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center text-2xl font-bold text-blue-600">
+            {{ data.nom.charAt(0) }}
+          </div>
+
+          <div>
+            <h1 class="text-2xl font-bold text-gray-800">
+              {{ data.nom }}
+            </h1>
+            <p class="text-gray-500">
+              {{ data.email }}
+            </p>
+            <p class="text-sm text-blue-600 mt-1">
+              {{ data.titreProfil }}
+            </p>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="grid md:grid-cols-2 gap-6 mt-8">
+          <div class="bg-gray-50 p-4 rounded-xl">
+            <h3 class="font-semibold text-gray-700">Expérience</h3>
+            <p class="text-gray-600">
+              {{ data.experience }} ans
+            </p>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-xl">
+            <h3 class="font-semibold text-gray-700">Email</h3>
+            <p class="text-gray-600">
+              {{ data.email }}
+            </p>
+          </div>
+        </div>
+
+        <!-- COMPETENCES -->
+        <div class="mt-8">
+          <h3 class="font-semibold text-gray-800 mb-3">Compétences</h3>
+          <div class="flex flex-wrap gap-2">
+            @for(skill of data.competences; track skill) {
+              <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
+                {{ skill }}
+              </span>
+            }
+          </div>
+        </div>
+
+        <!-- CV -->
+        <div class="mt-10">
+          <a [href]="data.cvUrl" target="_blank" class="bg-blue-600 text-white px-5 py-3 rounded-lg inline-block">
+            Voir CV
+          </a>
+        </div>
+
+      </div>
+    }
+
+  </div>
+</section>

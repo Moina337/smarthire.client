@@ -1,1 +1,161 @@
-<p>jobs works!</p>
+<section class="bg-gray-50 min-h-screen p-6">
+
+    <div class="max-w-7xl mx-auto">
+
+        <!-- HEADER -->
+        <div class="mb-8">
+
+            <h1 class="text-3xl font-bold text-gray-800">
+                Offres d'emploi disponibles
+            </h1>
+
+            <p class="text-gray-500 mt-2">
+                Trouvez l’opportunité qui correspond à votre profil
+            </p>
+
+        </div>
+
+        <!-- SEARCH -->
+        <div class="bg-white p-4 rounded-xl shadow-sm mb-8">
+
+            <div class="flex flex-col md:flex-row gap-3">
+
+                <input
+                    type="text"
+                    [ngModel]="keyword()"
+                    (ngModelChange)="keyword.set($event)"
+                    placeholder="Rechercher un emploi..."
+                    class="flex-1 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500" />
+
+                
+            </div>
+
+        </div>
+
+        <!-- JOBS GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            @for(job of jobs(); track job.id){
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition p-6 border border-gray-100">
+
+                <!-- TITLE -->
+                <div class="flex justify-between items-start">
+
+                    <h2 class="text-xl font-semibold text-gray-800">
+                        {{ job.titre }}
+                    </h2>
+
+                    <span class="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full">
+                        {{ job.experienceMin }} ans
+                    </span>
+
+                </div>
+
+                <!-- DESCRIPTION -->
+                <p class="text-gray-500 mt-4 line-clamp-3">
+                    {{ job.description }}
+                </p>
+
+                <!-- SKILLS -->
+                <div class="flex flex-wrap gap-2 mt-4">
+
+                    @for(skill of job.competencesRequises; track skill){
+
+                    <span class="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full">
+                        {{ skill }}
+                    </span>
+
+                    }
+
+                </div>
+
+                <!-- ACTIONS -->
+                <div class="mt-6 flex gap-3">
+                    <a  [routerLink]="['/jobs', job.id]"></a>
+
+                    <button
+                        [routerLink]="['/jobs', job.id]"
+                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition">
+
+                        Voir détails
+
+                    </button>
+
+                    <button
+                        [routerLink]="['/candidate/apply', job.id]"
+                        class="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-2 rounded-lg transition">
+
+                        Postuler
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            }
+
+        </div>
+
+        <!-- EMPTY -->
+        @if(jobs().length === 0){
+
+        <div class="text-center py-20">
+
+            <h3 class="text-xl font-semibold text-gray-700">
+                Aucune offre trouvée
+            </h3>
+
+            <p class="text-gray-500 mt-2">
+                Essayez une autre recherche
+            </p>
+
+        </div>
+
+        }
+
+        <!-- PAGINATION -->
+        @if(jobsPage().totalPages > 1){
+
+        <div class="flex justify-center gap-2 mt-10">
+
+            <button
+                (click)="prevPage()"
+                [disabled]="page() === 0"
+                class="px-4 py-2 border rounded disabled:opacity-50">
+
+                Précédent
+
+            </button>
+
+            @for(p of [].constructor(jobsPage().totalPages); track $index){
+
+            <button
+                (click)="page.set($index)"
+                [class.bg-blue-600]="page() === $index"
+                [class.text-white]="page() === $index"
+                class="px-4 py-2 border rounded">
+
+                {{ $index + 1 }}
+
+            </button>
+
+            }
+
+            <button
+                (click)="nextPage()"
+                [disabled]="page() >= jobsPage().totalPages - 1"
+                class="px-4 py-2 border rounded disabled:opacity-50">
+
+                Suivant
+
+            </button>
+
+        </div>
+
+        }
+
+    </div>
+
+</section>
