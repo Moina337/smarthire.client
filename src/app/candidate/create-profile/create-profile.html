@@ -1,0 +1,104 @@
+<section class="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+
+    <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-2xl">
+
+        <div class="mb-8 text-center">
+
+            <h1 class="text-3xl font-bold text-gray-800">
+                Compléter votre profil
+            </h1>
+
+            <p class="text-gray-500 mt-2">
+                Présentez votre profil professionnel
+            </p>
+
+        </div>
+
+        @if(errorMessage){
+
+        <div class="bg-red-100 text-red-600 p-3 rounded-lg mb-4">
+
+            {{ errorMessage }}
+
+        </div>
+
+        }
+
+        <div class="space-y-5">
+
+            <!-- TITRE -->
+            <div>
+
+                <label class="block mb-2 text-sm text-gray-600">
+
+                    Titre professionnel
+
+                </label>
+
+                <input
+                    [(ngModel)]="titreProfil"
+                    type="text"
+                    placeholder="Ex: Développeur Backend"
+                    class="w-full border rounded-lg p-3">
+
+            </div>
+
+            <!-- EXPERIENCE -->
+            <div>
+
+                <label class="block mb-2 text-sm text-gray-600">
+
+                    Expérience
+
+                </label>
+
+                <input
+                    [(ngModel)]="experience"
+                    type="number"
+                    class="w-full border rounded-lg p-3">
+
+            </div>
+
+            <!-- COMPETENCES -->
+            <div>
+
+                <label class="block mb-2 text-sm text-gray-600">
+
+                    Compétences (séparées par virgule)
+
+                </label>
+
+                <textarea
+                    [(ngModel)]="competences"
+                    rows="4"
+                    placeholder="Spring Boot, Java, Angular"
+                    class="w-full border rounded-lg p-3">
+                </textarea>
+
+            </div>
+
+            <!-- BUTTON -->
+            <button
+                (click)="createProfile()"
+                [disabled]="loading"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg">
+
+                @if(!loading){
+
+                    Créer mon profil
+
+                }
+
+                @if(loading){
+
+                    Création...
+
+                }
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>

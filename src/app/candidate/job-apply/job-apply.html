@@ -1,0 +1,29 @@
+<section class="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+
+  <div class="bg-white p-8 rounded-2xl shadow max-w-md w-full">
+
+    <h1 class="text-xl font-bold mb-4">
+
+      Postuler à l'offre #{{ jobId }}
+
+    </h1>
+
+    <!-- CV -->
+    <input
+      type="file"
+      accept=".pdf,.doc,.docx"
+      (change)="onCvSelected($event)"
+      class="w-full border p-2 rounded-lg">
+
+    <!-- BUTTON -->
+    <button
+      (click)="apply()"
+      class="w-full mt-4 bg-blue-600 text-white py-3 rounded-lg">
+
+      Envoyer ma candidature
+
+    </button>
+
+  </div>
+
+</section>

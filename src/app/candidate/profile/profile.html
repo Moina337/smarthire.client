@@ -1,67 +1,201 @@
-<section class="bg-gray-50 min-h-screen p-6">
-  <div class="max-w-4xl mx-auto">
+<section class="min-h-screen bg-gray-100 p-6">
 
-    <!-- PROFILE (Une seule lecture du Signal ici suffit) -->
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- HEADER DASHBOARD -->
     @if(profile(); as data) {
-      <div class="bg-white rounded-2xl shadow p-8">
 
-        <!-- HEADER -->
-        <div class="flex items-center gap-6">
-          <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center text-2xl font-bold text-blue-600">
-            {{ data.nom.charAt(0) }}
-          </div>
+    <div class="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row md:justify-between md:items-center">
 
-          <div>
-            <h1 class="text-2xl font-bold text-gray-800">
-              {{ data.nom }}
-            </h1>
-            <p class="text-gray-500">
-              {{ data.email }}
-            </p>
-            <p class="text-sm text-blue-600 mt-1">
-              {{ data.titreProfil }}
-            </p>
-          </div>
+      <!-- USER INFO -->
+      <div class="flex items-center gap-4">
+
+        <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold">
+
+          {{ data.nom.charAt(0) }}
+
         </div>
 
-        <!-- INFO -->
-        <div class="grid md:grid-cols-2 gap-6 mt-8">
-          <div class="bg-gray-50 p-4 rounded-xl">
-            <h3 class="font-semibold text-gray-700">Expérience</h3>
-            <p class="text-gray-600">
-              {{ data.experience }} ans
-            </p>
-          </div>
+        <div>
 
-          <div class="bg-gray-50 p-4 rounded-xl">
-            <h3 class="font-semibold text-gray-700">Email</h3>
-            <p class="text-gray-600">
-              {{ data.email }}
-            </p>
-          </div>
-        </div>
+          <h1 class="text-xl font-bold text-gray-800">
+            Bonjour {{ data.nom }}
+          </h1>
 
-        <!-- COMPETENCES -->
-        <div class="mt-8">
-          <h3 class="font-semibold text-gray-800 mb-3">Compétences</h3>
-          <div class="flex flex-wrap gap-2">
-            @for(skill of data.competences; track skill) {
-              <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
-                {{ skill }}
-              </span>
-            }
-          </div>
-        </div>
+          <p class="text-gray-500">
+            {{ data.titreProfil }}
+          </p>
 
-        <!-- CV -->
-        <div class="mt-10">
-          <a [href]="data.cvUrl" target="_blank" class="bg-blue-600 text-white px-5 py-3 rounded-lg inline-block">
-            Voir CV
-          </a>
         </div>
 
       </div>
+
+      <!-- ACTION -->
+      <button class="mt-4 md:mt-0 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg">
+
+        Modifier profil
+
+      </button>
+
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
+
+        <p class="text-gray-500 text-sm">Expérience</p>
+
+        <h2 class="text-2xl font-bold text-gray-800">
+          {{ data.experience }} ans
+        </h2>
+
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
+
+        <p class="text-gray-500 text-sm">Compétences</p>
+
+        <h2 class="text-2xl font-bold text-gray-800">
+          {{ data.competences.length }}
+        </h2>
+
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
+
+        <p class="text-gray-500 text-sm">Email</p>
+
+        <h2 class="text-sm font-semibold text-gray-700 truncate">
+          {{ data.email }}
+        </h2>
+
+      </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- LEFT: PROFILE DETAILS -->
+      <div class="md:col-span-2 space-y-6">
+
+        <!-- COMPETENCES -->
+        <div class="bg-white p-6 rounded-2xl shadow">
+
+          <h3 class="text-lg font-semibold mb-4 text-gray-800">
+            Compétences
+          </h3>
+
+          <div class="flex flex-wrap gap-2">
+
+            @for(skill of data.competences; track skill) {
+
+            <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
+
+              {{ skill }}
+
+            </span>
+
+            }
+
+          </div>
+
+        </div>
+
+        <!-- CV SECTION -->
+        <div class="bg-white p-6 rounded-2xl shadow">
+
+          <h3 class="text-lg font-semibold mb-4 text-gray-800">
+            CV
+          </h3>
+
+          @if(data.cvUrl){
+
+          <div class="flex items-center justify-between">
+
+            <span class="text-green-600 font-medium">
+              CV disponible
+            </span>
+
+            <a
+              [href]="data.cvUrl"
+              target="_blank"
+              class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+
+              Voir CV
+
+            </a>
+
+          </div>
+
+          } @else {
+
+          <p class="text-gray-500 mb-4">
+            Aucun CV ajouté
+          </p>
+
+          }
+
+          <!-- UPLOAD CV -->
+          <div class="mt-4">
+
+            <input
+              type="file"
+              (change)="onFileSelected($event)"
+              class="w-full border p-2 rounded-lg">
+
+            <button
+              (click)="uploadCv()"
+              class="mt-3 w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-black transition">
+
+              Mettre à jour CV
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT: QUICK ACTIONS -->
+      <div class="space-y-6">
+
+        <div class="bg-white p-6 rounded-2xl shadow">
+
+          <h3 class="font-semibold mb-4">Actions rapides</h3>
+
+          <button class="w-full bg-blue-600 text-white py-2 rounded-lg mb-3">
+
+            Modifier profil
+
+          </button>
+
+          <button class="w-full border border-blue-600 text-blue-600 py-2 rounded-lg">
+
+            Voir offres
+
+          </button>
+
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow">
+
+          <h3 class="font-semibold mb-3">Email</h3>
+
+          <p class="text-gray-600 text-sm">
+            {{ data.email }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
     }
 
   </div>
+
 </section>
