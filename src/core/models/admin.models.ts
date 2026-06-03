@@ -7,8 +7,15 @@ export interface AdminApplication {
   offreId?: number;
   candidat?: CandidatProfil;
   offre?: Job;
+  candidateId?: number;
+  candidateName?: string;
+  candidateEmail?: string;
+  jobId?: number;
+  jobTitre?: string;
+  cvFileUrl?: string;
   dateCandidature?: string;
-  statut: 'EN_ATTENTE' | 'ACCEPTEE' | 'REFUSEE';
+  appliedAt?: string;
+  statut: ApplicationStatus | null;
 }
 
 export interface AdminCandidate {
@@ -35,3 +42,7 @@ export interface JobRequest {
   experienceMin: number;
   competencesRequises: string[];
 }
+export type ApplicationStatus =
+  | 'EN_ATTENTE'
+  | 'ACCEPTEE'
+  | 'REFUSEE';

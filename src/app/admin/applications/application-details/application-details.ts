@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AdminApplication } from '../../../../core/models/admin.models';
+import { AdminApplication, ApplicationStatus } from '../../../../core/models/admin.models';
 import { AdminService } from '../../../../core/services/admin.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class ApplicationDetails implements OnInit {
   loading = signal(false);
 
   form = this.fb.nonNullable.group({
-    status: ['EN_ATTENTE']
+    status: this.fb.nonNullable.control<ApplicationStatus>('EN_ATTENTE')
   });
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class ApplicationDetails implements OnInit {
     this.adminService.getApplicationById(id).subscribe({
       next: data => {
         this.application.set(data);
-        this.form.patchValue({ status: data.statut });
+        this.form.patchValue({ status: (data.statut ?? 'EN_ATTENTE') as ApplicationStatus });
         this.loading.set(false);
       },
       error: () => this.loading.set(false)
@@ -39,7 +39,7 @@ export class ApplicationDetails implements OnInit {
 
   updateStatus(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    const status = this.form.get('status')?.value ?? 'EN_ATTENTE';
+    const status = (this.form.get('status')?.value ?? 'EN_ATTENTE') as ApplicationStatus;
     this.adminService.updateApplicationStatus(id, status).subscribe({
       next: data => this.application.set(data)
     });

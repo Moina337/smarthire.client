@@ -15,7 +15,7 @@
           <div>
             <p class="text-xs uppercase tracking-[0.3em] text-blue-600">{{ application.statut }}</p>
             <h3 class="mt-1 text-xl font-semibold text-slate-900">{{ application.candidat?.nom || 'Candidat' }} · {{ application.offre?.titre || 'Offre' }}</h3>
-            <p class="text-sm text-slate-500">Date : {{ application.dateCandidature || '—' }}</p>
+            <p class="text-sm text-slate-500">Date : {{ application.appliedAt || '—' }}</p>
           </div>
           <a [routerLink]="['/admin/applications', application.id]" class="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">Voir détails</a>
         </div>
