@@ -16,19 +16,24 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class CandidateLayout {
 
-  private authService =
-    inject(AuthService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  private router =
-    inject(Router);
+  // État du menu mobile
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
 
   logout() {
-
     this.authService.logout();
-
-    this.router.navigate([
-      '/login'
-    ]);
+    this.closeMenu();
+    this.router.navigate(['/login']);
   }
 
 }

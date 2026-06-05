@@ -53,7 +53,7 @@ export class Register {
             .saveToken(res.token);
 
           this.router.navigate([
-            '/candidate/profile/create'
+            this.authService.redirectAfterLogin()
           ]);
 
         },

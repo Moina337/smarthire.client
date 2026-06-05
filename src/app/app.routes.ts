@@ -17,6 +17,12 @@ import { CandidatesList } from './admin/candidates/candidates-list/candidates-li
 import { CandidateDetails } from './admin/candidates/candidate-details/candidate-details';
 import { ApplicationsList } from './admin/applications/applications-list/applications-list';
 import { ApplicationDetails } from './admin/applications/application-details/application-details';
+import { Home } from './public/home/home';
+import { Dashbord } from './candidate/dashbord/dashbord';
+import { OAuth2SuccessComponent } from './auth/oauth-success/oauth-success'; 
+import { AuthGuard } from '../core/guards/auth.guard';
+import { AdminGuard } from '../core/guards/admin.guard';
+import { GuestGuard } from '../core/guards/guest.guard';
 
 export const routes: Routes = [
    
@@ -26,7 +32,11 @@ export const routes: Routes = [
   children: [
 
     {
-      path: '',
+          path: '',
+          component: Home
+    },
+    {
+      path: 'jobs',
       component: Jobs
     },
     {
@@ -39,18 +49,41 @@ export const routes: Routes = [
 {
   path:'register',
   component:Register
+  ,    canMatch:[GuestGuard],
+       canActivate:[GuestGuard]
 },
 {
   path:'login',
   component: Login
+  ,    canMatch:[GuestGuard],
+       canActivate:[GuestGuard]
+},
+{
+  path: 'oauth2-success',
+  component: OAuth2SuccessComponent
 },
 {
   path: 'candidate',
   component: CandidateLayout,
+      canMatch:[AuthGuard],
+      canActivate:[AuthGuard],
   children: [
+
+    {
+      path: '',
+      component: Profile
+    },
     {
       path: 'profile',
       component: Profile
+    },
+        {
+          path: 'dashboard',
+          component: Dashbord
+        },
+    {
+      path: 'create',
+      component: CreateProfile
     },
     {
       path: 'profile/create',
@@ -64,11 +97,15 @@ export const routes: Routes = [
 },
 {
   path: 'jobs/:id/apply',
-  component: JobApply
+  component: JobApply,
+  canMatch:[AuthGuard],
+  canActivate:[AuthGuard]
 },
 {
   path: 'admin',
   component: AdminLayout,
+  canMatch:[AdminGuard],
+  canActivate:[AdminGuard],
   children: [
     { path: '', component: AdminDashboard },
     { path: 'jobs', component: JobsList },

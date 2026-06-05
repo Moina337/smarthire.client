@@ -1,105 +1,197 @@
-<div class="min-h-screen flex bg-gray-100">
+<div class="min-h-screen bg-slate-50 flex flex-col md:flex-row">
 
-  <!-- SIDEBAR -->
-  <aside
-    class="w-64 bg-white shadow-lg hidden md:flex flex-col">
-
-    <!-- LOGO -->
-    <div class="p-6 border-b">
-
-      <h1 class="text-2xl font-bold text-blue-600">
-
-        SmartHire
-
-      </h1>
-
-      <p class="text-gray-500 text-sm">
-
-        Espace candidat
-
-      </p>
-
-    </div>
-
-    <!-- MENU -->
-    <nav class="flex-1 p-4 space-y-2">
-
-      <a
-        routerLink="/candidate/dashboard"
-        routerLinkActive="bg-blue-50 text-blue-600"
-        class="block px-4 py-3 rounded-lg hover:bg-gray-100">
-
-        🏠 Dashboard
-
-      </a>
-
-      <a
-        routerLink="/candidate/profile"
-        routerLinkActive="bg-blue-50 text-blue-600"
-        class="block px-4 py-3 rounded-lg hover:bg-gray-100">
-
-        👤 Mon profil
-
-      </a>
-
-      <a
-        routerLink="/candidate/applications"
-        routerLinkActive="bg-blue-50 text-blue-600"
-        class="block px-4 py-3 rounded-lg hover:bg-gray-100">
-
-        📄 Mes postulations
-
-      </a>
-
-    </nav>
-
-    <!-- LOGOUT -->
-    <div class="p-4 border-t">
-
-      <button
-        (click)="logout()"
-        class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg">
-
-        Déconnexion
-
+  <!-- ═══════════════════════════════════════
+       MOBILE HEADER
+  ════════════════════════════════════════ -->
+  <header class="bg-white border-b border-slate-100 px-4 py-3 flex items-center justify-between md:hidden">
+    <div class="flex items-center gap-3">
+      <button (click)="toggleMenu()"
+              class="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              aria-label="Ouvrir le menu">
+        <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+        </svg>
       </button>
-
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
+          </svg>
+        </div>
+        <span class="text-base font-semibold text-slate-900">SmartHire</span>
+      </div>
     </div>
+    <div class="flex items-center gap-2">
+      <button class="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 text-xs font-semibold">
+        U
+      </button>
+    </div>
+  </header>
 
-  </aside>
+  <!-- ═══════════════════════════════════════
+       MOBILE NAV OVERLAY
+  ════════════════════════════════════════ -->
+  <div *ngIf="menuOpen" class="fixed inset-0 z-40 flex md:hidden">
+    <div class="fixed inset-0 bg-black/40 backdrop-blur-sm" (click)="closeMenu()"></div>
+    <aside class="relative bg-white w-72 h-full flex flex-col shadow-xl z-50">
 
-  <!-- MAIN -->
-  <div class="flex-1 flex flex-col">
-
-    <!-- HEADER -->
-    <header
-      class="bg-white shadow px-6 py-4 flex justify-between items-center">
-
-      <div>
-
-        <h2 class="text-lg font-semibold">
-
-          Espace candidat
-
-        </h2>
-
-        <p class="text-sm text-gray-500">
-
-          Gérez votre profil et vos candidatures
-
-        </p>
-
+      <!-- Logo -->
+      <div class="p-5 border-b border-slate-100 flex items-center gap-3">
+        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-base font-semibold text-slate-900">SmartHire</h1>
+          <p class="text-xs text-slate-400">Espace candidat</p>
+        </div>
       </div>
 
+      <!-- Nav -->
+      <nav class="flex-1 p-3 space-y-1">
+        <p class="text-xs font-medium text-slate-400 uppercase tracking-wider px-3 py-2">Menu</p>
+
+        <a routerLink="/candidate/dashboard" (click)="closeMenu()"
+           routerLinkActive="bg-blue-50 text-blue-600 font-medium"
+           class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors text-sm">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"/>
+          </svg>
+          Dashboard
+        </a>
+
+        <a routerLink="/candidate/profile" (click)="closeMenu()"
+           routerLinkActive="bg-blue-50 text-blue-600 font-medium"
+           class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors text-sm">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+          </svg>
+          Mon profil
+        </a>
+
+        <a routerLink="/candidate/applications" (click)="closeMenu()"
+           routerLinkActive="bg-blue-50 text-blue-600 font-medium"
+           class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors text-sm">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+          </svg>
+          Mes postulations
+        </a>
+      </nav>
+
+      <!-- Footer utilisateur -->
+      <div class="p-3 border-t border-slate-100">
+        <div class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-50 cursor-pointer">
+          <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xs font-semibold flex-shrink-0">U</div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-slate-900 truncate">Mon compte</p>
+            <p class="text-xs text-slate-400">Candidat</p>
+          </div>
+        </div>
+        <button (click)="logout()"
+                class="mt-2 w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors text-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"/>
+          </svg>
+          Déconnexion
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR DESKTOP
+  ════════════════════════════════════════ -->
+  <aside class="w-64 bg-white border-r border-slate-100 hidden md:flex flex-col flex-shrink-0">
+
+    <!-- Logo -->
+    <div class="p-5 border-b border-slate-100 flex items-center gap-3">
+      <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-base font-semibold text-slate-900">SmartHire</h1>
+        <p class="text-xs text-slate-400">Espace candidat</p>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 p-3 space-y-1">
+      <p class="text-xs font-medium text-slate-400 uppercase tracking-wider px-3 py-2">Menu</p>
+
+      <a routerLink="/candidate/dashboard"
+         routerLinkActive="bg-blue-50 text-blue-600 font-medium"
+         class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors text-sm">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <a routerLink="/candidate/profile"
+         routerLinkActive="bg-blue-50 text-blue-600 font-medium"
+         class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors text-sm">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+        </svg>
+        Mon profil
+      </a>
+
+      <a routerLink="/candidate/applications"
+         routerLinkActive="bg-blue-50 text-blue-600 font-medium"
+         class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors text-sm">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+        </svg>
+        Mes postulations
+      </a>
+    </nav>
+
+    <!-- Footer utilisateur -->
+    <div class="p-3 border-t border-slate-100">
+      <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer mb-1">
+        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xs font-semibold flex-shrink-0">U</div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium text-slate-900 truncate">Mon compte</p>
+          <p class="text-xs text-slate-400">Candidat</p>
+        </div>
+      </div>
+      <button (click)="logout()"
+              class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"/>
+        </svg>
+        Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ════════════════════════════════════════ -->
+  <div class="flex-1 flex flex-col min-w-0">
+
+    <!-- Topbar desktop -->
+    <header class="hidden md:flex bg-white border-b border-slate-100 px-6 py-3.5 items-center justify-between flex-shrink-0">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-900">Espace candidat</h2>
+        <p class="text-xs text-slate-400">Gérez votre profil et vos candidatures</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors text-slate-500" aria-label="Notifications">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/>
+          </svg>
+        </button>
+      </div>
     </header>
 
-    <!-- PAGE CONTENT -->
-    <main class="flex-1 p-6">
-
+    <main class="flex-1 p-4 sm:p-6">
       <router-outlet></router-outlet>
-
     </main>
-
   </div>
 
 </div>

@@ -7,17 +7,25 @@
           <h1 class="mt-2 text-3xl font-semibold text-slate-900">Centre d’administration</h1>
           <p class="mt-2 text-slate-500">Pilotage des offres, candidats et candidatures en un seul espace.</p>
         </div>
-        <nav class="flex flex-wrap gap-2">
-          @for (item of links; track item.path) {
-            <a
-              [routerLink]="item.path"
-              routerLinkActive="bg-blue-600 text-white shadow"
-              class="rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
-            >
-              {{ item.label }}
-            </a>
-          }
-        </nav>
+        <div class="flex flex-wrap items-center gap-3">
+          <nav class="flex flex-wrap gap-2">
+            @for (item of links; track item.path) {
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="bg-blue-600 text-white shadow"
+                class="rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+              >
+                {{ item.label }}
+              </a>
+            }
+          </nav>
+          <button
+            (click)="logout()"
+            class="rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
+          >
+            Déconnexion
+          </button>
+        </div>
       </div>
     </header>
 

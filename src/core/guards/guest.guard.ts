@@ -12,30 +12,29 @@ import {
 import { AuthService } from '../services/auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanMatch, CanActivate {
+export class GuestGuard implements CanMatch, CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
 
-  private ensureAuthenticated(
-    url: string
-  ): boolean | UrlTree {
-    if (this.authService.isLoggedIn()) {
+  private redirectLoggedUser(): boolean | UrlTree {
+    if (!this.authService.isLoggedIn()) {
       return true;
     }
-    return this.router.parseUrl(`/login?redirect=${encodeURIComponent(url)}`);
+
+    const redirect = this.authService.redirectAfterLogin();
+    return this.router.parseUrl(redirect);
   }
 
   canMatch(route: Route, segments: UrlSegment[]) {
-    const url = '/' + segments.map(s => s.path).join('/');
-    return this.ensureAuthenticated(url);
+    return this.redirectLoggedUser();
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) {
-    return this.ensureAuthenticated(state.url);
+    return this.redirectLoggedUser();
   }
 }

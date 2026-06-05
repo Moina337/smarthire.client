@@ -44,20 +44,11 @@ export class CandidateService {
     );
   }
 
-  apply(jobId: number, file: File) {
-
-  const formData = new FormData();
-
-  formData.append('file', file); // IMPORTANT
-
-  return this.http.post(
-
-    `${this.baseUrl}/candidate/applications/${jobId}`,
-
-    formData
-
-  );
-
-}
+  apply(jobId: number) {
+    return this.http.post(
+      `${this.baseUrl}/candidate/applications/${jobId}`,
+      {}
+    );
+  }
 
 }

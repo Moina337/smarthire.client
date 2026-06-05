@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,11 +15,27 @@ import { RouterModule } from '@angular/router';
 })
 export class Navbar {
 
+  private authService = inject(AuthService) as AuthService;
+  private router = inject(Router);
+
   menuOpen = false;
 
   toggleMenu() {
-    this.menuOpen =
-      !this.menuOpen;
+    this.menuOpen = !this.menuOpen;
+  }
+
+  get isLogged() {
+    return this.authService.isLoggedIn();
+  }
+
+  get isAdmin() {
+    const role = this.authService.getUserRole();
+    return !!role && role.toString().toLowerCase().includes('admin');
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

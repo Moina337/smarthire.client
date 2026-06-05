@@ -1,201 +1,237 @@
-<section class="min-h-screen bg-gray-100 p-6">
+<section class="min-h-screen bg-slate-50 p-4 sm:p-6">
+  <div class="max-w-4xl mx-auto space-y-6">
 
-  <div class="max-w-6xl mx-auto space-y-6">
-
-    <!-- HEADER DASHBOARD -->
     @if(profile(); as data) {
 
-    <div class="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row md:justify-between md:items-center">
+    <!-- ══ Hero — identité candidat ══ -->
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
-      <!-- USER INFO -->
-      <div class="flex items-center gap-4">
-
-        <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold">
-
-          {{ data.nom.charAt(0) }}
-
+        <div class="flex items-center gap-4">
+          <!-- Avatar initiale -->
+          <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 text-xl font-semibold flex-shrink-0">
+            {{ data.nom.charAt(0) }}
+          </div>
+          <div>
+            <h1 class="text-lg font-semibold text-slate-900">{{ data.nom }}</h1>
+            <p class="text-sm text-slate-500 mt-0.5">{{ data.titreProfil }}</p>
+            <div class="flex items-center gap-1.5 mt-1.5">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
+              </svg>
+              <span class="text-xs text-slate-400">{{ data.email }}</span>
+            </div>
+          </div>
         </div>
 
+        <a routerLink="/candidate/profile/edit"
+           class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors flex-shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z"/>
+          </svg>
+          Modifier le profil
+        </a>
+      </div>
+    </div>
+
+    <!-- ══ Stats ══ -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 sm:p-5 flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
+          </svg>
+        </div>
         <div>
-
-          <h1 class="text-xl font-bold text-gray-800">
-            Bonjour {{ data.nom }}
-          </h1>
-
-          <p class="text-gray-500">
-            {{ data.titreProfil }}
-          </p>
-
+          <p class="text-xs text-slate-400">Expérience</p>
+          <p class="text-xl font-semibold text-slate-900">{{ data.experience }} <span class="text-sm font-normal text-slate-500">ans</span></p>
         </div>
-
       </div>
 
-      <!-- ACTION -->
-      <button class="mt-4 md:mt-0 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg">
-
-        Modifier profil
-
-      </button>
-
-    </div>
-
-    <!-- STATS CARDS -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-      <div class="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
-
-        <p class="text-gray-500 text-sm">Expérience</p>
-
-        <h2 class="text-2xl font-bold text-gray-800">
-          {{ data.experience }} ans
-        </h2>
-
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 sm:p-5 flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6h.008v.008H6V6Z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-xs text-slate-400">Compétences</p>
+          <p class="text-xl font-semibold text-slate-900">{{ data.competences.length }}</p>
+        </div>
       </div>
 
-      <div class="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
-
-        <p class="text-gray-500 text-sm">Compétences</p>
-
-        <h2 class="text-2xl font-bold text-gray-800">
-          {{ data.competences.length }}
-        </h2>
-
-      </div>
-
-      <div class="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
-
-        <p class="text-gray-500 text-sm">Email</p>
-
-        <h2 class="text-sm font-semibold text-gray-700 truncate">
-          {{ data.email }}
-        </h2>
-
-      </div>
-
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <!-- LEFT: PROFILE DETAILS -->
-      <div class="md:col-span-2 space-y-6">
-
-        <!-- COMPETENCES -->
-        <div class="bg-white p-6 rounded-2xl shadow">
-
-          <h3 class="text-lg font-semibold mb-4 text-gray-800">
-            Compétences
-          </h3>
-
-          <div class="flex flex-wrap gap-2">
-
-            @for(skill of data.competences; track skill) {
-
-            <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
-
-              {{ skill }}
-
-            </span>
-
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 sm:p-5 flex items-center gap-3 col-span-2 sm:col-span-1">
+        <div class="w-9 h-9 rounded-xl bg-violet-50 flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <p class="text-xs text-slate-400">CV</p>
+          <p class="text-sm font-medium text-slate-900 truncate">
+            @if(data.cvUrl) {
+              <span class="text-emerald-600">Disponible</span>
+            } @else {
+              <span class="text-slate-400">Non ajouté</span>
             }
+          </p>
+        </div>
+      </div>
+    </div>
 
+    <!-- ══ Contenu principal ══ -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+      <!-- Colonne gauche : compétences + CV -->
+      <div class="lg:col-span-3 space-y-5">
+
+        <!-- Compétences -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-semibold text-slate-900">Compétences</h3>
+            <span class="text-xs text-slate-400">{{ data.competences.length }} au total</span>
           </div>
-
+          <div class="flex flex-wrap gap-2">
+            @for(skill of data.competences; track skill) {
+              <span class="inline-flex items-center bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1.5 rounded-full transition-colors cursor-default">
+                {{ skill }}
+              </span>
+            }
+          </div>
         </div>
 
-        <!-- CV SECTION -->
-        <div class="bg-white p-6 rounded-2xl shadow">
+        <!-- CV -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6">
+          <h3 class="text-sm font-semibold text-slate-900 mb-4">Curriculum Vitae</h3>
 
-          <h3 class="text-lg font-semibold mb-4 text-gray-800">
-            CV
-          </h3>
-
-          @if(data.cvUrl){
-
-          <div class="flex items-center justify-between">
-
-            <span class="text-green-600 font-medium">
-              CV disponible
-            </span>
-
-            <a
-              [href]="data.cvUrl"
-              target="_blank"
-              class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-
-              Voir CV
-
-            </a>
-
-          </div>
-
+          @if(data.cvUrl) {
+            <!-- CV existant -->
+            <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl mb-4">
+              <div class="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs font-medium text-emerald-800">CV disponible</p>
+                <p class="text-xs text-emerald-600 truncate">{{ data.cvUrl }}</p>
+              </div>
+              <a [href]="data.cvUrl" target="_blank"
+                 class="text-xs font-medium text-emerald-700 hover:text-emerald-800 flex items-center gap-1 flex-shrink-0">
+                Voir
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+                </svg>
+              </a>
+            </div>
           } @else {
-
-          <p class="text-gray-500 mb-4">
-            Aucun CV ajouté
-          </p>
-
+            <div class="flex items-center gap-3 p-3 bg-slate-50 border border-slate-100 rounded-xl mb-4">
+              <div class="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+                </svg>
+              </div>
+              <p class="text-xs text-slate-500">Aucun CV ajouté pour le moment</p>
+            </div>
           }
 
-          <!-- UPLOAD CV -->
-          <div class="mt-4">
-
-            <input
-              type="file"
-              (change)="onFileSelected($event)"
-              class="w-full border p-2 rounded-lg">
-
-            <button
-              (click)="uploadCv()"
-              class="mt-3 w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-black transition">
-
-              Mettre à jour CV
-
+          <!-- Upload zone -->
+          <div class="space-y-3">
+            <label class="block">
+              <span class="text-xs font-medium text-slate-600 block mb-1.5">
+                {{ data.cvUrl ? 'Remplacer le CV' : 'Ajouter un CV' }}
+              </span>
+              <div class="relative">
+                <input type="file"
+                       (change)="onFileSelected($event)"
+                       class="block w-full text-xs text-slate-500
+                              file:mr-3 file:py-2 file:px-3
+                              file:rounded-lg file:border-0
+                              file:text-xs file:font-medium
+                              file:bg-slate-100 file:text-slate-700
+                              hover:file:bg-slate-200
+                              file:transition-colors file:cursor-pointer
+                              border border-slate-200 rounded-xl p-2
+                              cursor-pointer" />
+              </div>
+            </label>
+            <button (click)="uploadCv()"
+                    class="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white text-sm font-medium py-2.5 rounded-xl transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/>
+              </svg>
+              {{ data.cvUrl ? 'Mettre à jour le CV' : 'Envoyer le CV' }}
             </button>
-
           </div>
-
         </div>
 
       </div>
 
-      <!-- RIGHT: QUICK ACTIONS -->
-      <div class="space-y-6">
+      <!-- Colonne droite : actions + infos -->
+      <aside class="lg:col-span-2 space-y-4">
 
-        <div class="bg-white p-6 rounded-2xl shadow">
-
-          <h3 class="font-semibold mb-4">Actions rapides</h3>
-
-          <button class="w-full bg-blue-600 text-white py-2 rounded-lg mb-3">
-
-            Modifier profil
-
-          </button>
-
-          <button class="w-full border border-blue-600 text-blue-600 py-2 rounded-lg">
-
-            Voir offres
-
-          </button>
-
+        <!-- Actions rapides -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+          <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Actions</h3>
+          <div class="space-y-2">
+            <a routerLink="/candidate/profile/edit"
+               class="flex items-center gap-3 w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z"/>
+              </svg>
+              Modifier le profil
+            </a>
+            <a routerLink="/jobs"
+               class="flex items-center gap-3 w-full border border-slate-200 hover:border-blue-300 hover:bg-blue-50 text-slate-700 hover:text-blue-700 text-sm font-medium px-4 py-2.5 rounded-xl transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 15.803 7.5 7.5 0 0 0 15.803 15.803Z"/>
+              </svg>
+              Parcourir les offres
+            </a>
+          </div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow">
-
-          <h3 class="font-semibold mb-3">Email</h3>
-
-          <p class="text-gray-600 text-sm">
-            {{ data.email }}
-          </p>
-
+        <!-- Infos de contact -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+          <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Contact</h3>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs text-slate-400">Email</p>
+                <p class="text-sm text-slate-700 truncate">{{ data.email }}</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-      </div>
+        <!-- Complétion profil -->
+        <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-5 text-white">
+          <div class="flex items-center gap-2 mb-3">
+            <svg class="w-4 h-4 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/>
+            </svg>
+            <h3 class="text-sm font-semibold">Complétez votre profil</h3>
+          </div>
+          <div class="w-full h-1.5 bg-blue-500/40 rounded-full overflow-hidden mb-2">
+            <div class="h-full bg-white rounded-full" style="width: 65%"></div>
+          </div>
+          <div class="flex justify-between items-center">
+            <p class="text-xs text-blue-200">Profil à 65%</p>
+            <a routerLink="/candidate/profile/edit" class="text-xs font-medium text-white underline underline-offset-2">Compléter →</a>
+          </div>
+        </div>
 
+      </aside>
     </div>
 
-    }
+    } <!-- fin @if -->
 
   </div>
-
 </section>

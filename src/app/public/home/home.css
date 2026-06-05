@@ -1,0 +1,116 @@
+section.home-hero {
+	display: grid;
+	gap: 2rem;
+	padding: 3rem 1.5rem;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.hero-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	padding: 2.5rem;
+	border-radius: 2rem;
+	background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 35%),
+		#ffffff;
+	box-shadow: 0 32px 80px rgba(15, 23, 42, 0.08);
+}
+
+.hero-badge {
+	display: inline-flex;
+	padding: 0.75rem 1.25rem;
+	border-radius: 9999px;
+	background: #eff6ff;
+	color: #2563eb;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	font-size: 0.85rem;
+}
+
+.hero-content h1 {
+	font-size: clamp(2rem, 4vw, 3.5rem);
+	line-height: 1.05;
+	color: #0f172a;
+}
+
+.hero-content p {
+	max-width: 55ch;
+	color: #475569;
+	font-size: 1.05rem;
+	line-height: 1.75;
+}
+
+.hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.hero-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 160px;
+	padding: 1rem 1.5rem;
+	border-radius: 9999px;
+	font-weight: 700;
+	transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.hero-button:hover {
+	transform: translateY(-1px);
+}
+
+.hero-button.primary {
+	background: #2563eb;
+	color: #ffffff;
+}
+
+.hero-button.secondary {
+	background: #e2e8f0;
+	color: #0f172a;
+}
+
+.hero-cards {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.hero-card {
+	border-radius: 1.75rem;
+	padding: 1.75rem;
+	min-height: 180px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+.card-blue {
+	background: linear-gradient(135deg, rgba(59, 130, 246, 0.14), rgba(37, 99, 235, 0.12));
+	border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.card-white {
+	background: #ffffff;
+	border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.card-slate {
+	background: #f8fafc;
+	border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.hero-card h2 {
+	margin-bottom: 0.75rem;
+	font-size: 1.15rem;
+	color: #0f172a;
+}
+
+.hero-card p {
+	color: #475569;
+	line-height: 1.7;
+}
