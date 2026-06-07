@@ -1,59 +1,137 @@
-# SmarthireClient
+# 💼 SmartHire Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.12.
+Frontend Angular de la plateforme de recrutement SmartHire.
 
-## Development server
+## 🚀 Présentation
 
-To start a local development server, run:
+Interface utilisateur moderne permettant aux candidats et aux administrateurs d'interagir avec la plateforme SmartHire.
+
+---
+
+## ✨ Fonctionnalités
+
+### Candidat
+
+* Inscription
+* Connexion
+* Connexion Google OAuth2
+* Tableau de bord candidat
+* Consultation des offres
+* Dépôt de CV
+* Suivi des candidatures
+
+### Administrateur
+
+* Tableau de bord RH
+* Gestion des offres
+* Gestion des candidats
+* Gestion des candidatures
+* Consultation des CV
+
+---
+
+## 🛠 Technologies
+
+* Angular
+* TypeScript
+* Tailwind CSS
+* RxJS
+* Angular Router
+* Angular HttpClient
+
+---
+
+## 📱 Interface
+
+Design :
+
+* Responsive
+* Mobile First
+* Dashboard moderne
+* UX orientée recrutement
+
+---
+
+## 🔗 Communication API
+
+Le frontend communique avec :
+
+```plaintext
+http://localhost:8080
+```
+
+via :
+
+```plaintext
+REST API
+JWT
+OAuth2
+```
+
+---
+
+## ⚙️ Installation
+
+### Cloner le projet
+
+```bash
+git clone https://github.com/VOTRE_USERNAME/smarthire-frontend.git
+```
+
+### Installer les dépendances
+
+```bash
+npm install
+```
+
+### Lancer le projet
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Application disponible sur :
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```plaintext
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
+## 🔐 Authentification
+
+SmartHire utilise :
+
+* JWT Authentication
+* Google OAuth2 Login
+
+Le token est stocké côté client puis envoyé automatiquement à l'API.
+
+---
+
+## 📸 Aperçu
+
+Ajouter ici :
+
+* Dashboard candidat
+* Dashboard admin
+* Liste des offres
+* Gestion des candidatures
+
+---
+
+## 🎥 Démonstration
+
+Vidéo :
+
+```plaintext
+Lien de votre démonstration
 ```
 
-## Building
+---
 
-To build the project run:
+## 👨‍💻 Auteur
 
-```bash
-ng build
-```
+Amiri Soilihi
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Développeur Full Stack Java / Angular
