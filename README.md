@@ -7,6 +7,11 @@ Frontend Angular de la plateforme de recrutement SmartHire.
 Interface utilisateur moderne permettant aux candidats et aux administrateurs d'interagir avec la plateforme SmartHire.
 
 ---
+## 🌐 Démo & Liens
+
+- 🔗 Frontend : https://github.com/Moina337/smarthire.client  
+- 🔗 Backend : https://github.com/Moina337/smartHire.api 
+- 📘 Swagger API : http://localhost:8080/swagger-ui/index.html 
 
 ## ✨ Fonctionnalités
 
