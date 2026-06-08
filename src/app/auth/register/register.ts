@@ -52,8 +52,9 @@ export class Register {
           this.authService
             .saveToken(res.token);
 
+          // Redirection vers création de profil candidat
           this.router.navigate([
-            this.authService.redirectAfterLogin()
+            '/candidate/create'
           ]);
 
         },

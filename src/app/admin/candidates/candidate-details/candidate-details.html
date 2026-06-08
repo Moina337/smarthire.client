@@ -14,7 +14,7 @@
             <p class="text-sm text-blue-600">{{ data.titreProfil }}</p>
           </div>
         </div>
-        <a [href]="data.cvUrl" target="_blank" class="rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700">Voir le CV</a>
+        <button (click)="telechargerCv(data.cvUrl)" class="rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 border-none cursor-pointer">Télécharger le CV</button>
       </div>
 
       <div class="mt-8 grid gap-6 md:grid-cols-2">

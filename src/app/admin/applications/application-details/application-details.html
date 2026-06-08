@@ -26,7 +26,12 @@
         <article class="rounded-3xl bg-slate-50 p-5">
           <h3 class="text-lg font-semibold text-slate-900">CV candidat</h3>
           <p class="mt-2 text-sm text-slate-500">Consultez le CV associé au candidat.</p>
-          <a [href]="data.cvFileUrl || data.candidat?.cvUrl" target="_blank" class="mt-4 inline-flex rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">Ouvrir le CV</a>
+      <button
+        type="button"
+        (click)="telechargerCv(data.cvFileUrl || data.candidat?.cvUrl)"
+        class="mt-4 inline-flex rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 border-none cursor-pointer">
+        Télécharger le CV
+      </button>
         </article>
       </div>
 

@@ -52,6 +52,8 @@ export class CreateProfile {
 
         next: () => {
 
+          alert('Profil candidat créé avec succès !');
+
           this.router.navigate([
             '/candidate/profile'
           ]);
@@ -63,6 +65,8 @@ export class CreateProfile {
 
           this.errorMessage =
             'Création impossible';
+
+          alert('Erreur lors de la création du profil. Veuillez réessayer.');
 
           this.loading = false;
         },

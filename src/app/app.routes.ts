@@ -71,7 +71,7 @@ export const routes: Routes = [
 
     {
       path: '',
-      component: Profile
+      component: Dashbord
     },
     {
       path: 'profile',
