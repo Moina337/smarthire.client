@@ -19,29 +19,14 @@ export class JobApply {
 
   jobId!: number;
 
-  selectedCv?: File;
-
   ngOnInit() {
-
-    this.jobId =
-      Number(
-        this.route.snapshot.paramMap.get('id')
-      );
-  }
-
-  onCvSelected(event: any) {
-
-    this.selectedCv =
-      event.target.files[0];
+    this.jobId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
   apply() {
-
-  if (!this.selectedCv) return;
-
-  this.candidateService
-    .apply(this.jobId, this.selectedCv)
-    .subscribe({
+    this.candidateService
+      .apply(this.jobId)
+      .subscribe({
 
       next: () => {
 
@@ -53,12 +38,8 @@ export class JobApply {
       },
 
       error: (err) => {
-
         console.log(err);
-
       }
-
     });
-}
-
+  }
 }

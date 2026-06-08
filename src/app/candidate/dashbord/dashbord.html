@@ -1,53 +1,135 @@
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="max-w-5xl mx-auto space-y-6">
 
-  <!-- PROFILE CARD -->
-  <div class="bg-white p-6 rounded-2xl shadow">
+  <!-- ── Stats rapides ── -->
+  <div class="grid grid-cols-3 gap-3 sm:gap-4">
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 sm:p-5">
+      <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">Candidatures</p>
+      <p class="text-2xl font-semibold text-slate-900 mt-1">3</p>
+      <p class="text-xs text-slate-400 mt-0.5">en cours</p>
+    </div>
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 sm:p-5">
+      <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">Entretiens</p>
+      <p class="text-2xl font-semibold text-slate-900 mt-1">1</p>
+      <p class="text-xs text-slate-400 mt-0.5">cette semaine</p>
+    </div>
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 sm:p-5">
+      <p class="text-xs text-slate-400 font-medium uppercase tracking-wide">Offres vues</p>
+      <p class="text-2xl font-semibold text-slate-900 mt-1">12</p>
+      <p class="text-xs text-slate-400 mt-0.5">ce mois</p>
+    </div>
+  </div>
 
-    <div class="flex items-center gap-3">
+  <!-- ── Grille principale ── -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-      <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+    <!-- Carte profil -->
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 space-y-4">
 
-        U
-
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-semibold text-sm flex-shrink-0">
+          U
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-slate-900">Mon Profil</h3>
+          <p class="text-xs text-slate-400">Candidat</p>
+        </div>
       </div>
 
+      <!-- Progression -->
       <div>
-
-        <h3 class="font-semibold">
-          Mon Profil
-        </h3>
-
-        <p class="text-sm text-gray-500">
-          Complétez votre profil
-        </p>
-
+        <div class="flex justify-between items-center mb-1.5">
+          <span class="text-xs text-slate-500">Profil complété</span>
+          <span class="text-xs font-semibold text-blue-600">65%</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+          <div class="h-full bg-blue-600 rounded-full" style="width: 65%"></div>
+        </div>
+        <p class="text-xs text-slate-400 mt-1.5">Ajoutez vos compétences pour améliorer votre score</p>
       </div>
 
+      <a routerLink="/candidate/create"
+         class="flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2.5 rounded-xl transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125"/>
+        </svg>
+        Compléter mon profil
+      </a>
+
+      <!-- Liens rapides -->
+      <div class="pt-3 border-t border-slate-50 space-y-1">
+        <a routerLink="/candidate/applications"
+           class="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-600 group">
+          <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+          </svg>
+          Mes postulations
+          <svg class="w-3 h-3 ml-auto text-slate-300 group-hover:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+          </svg>
+        </a>
+      </div>
     </div>
 
-    <button class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg">
+    <!-- Offres recommandées -->
+    <div class="lg:col-span-2 space-y-4">
 
-      Compléter
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-base font-semibold text-slate-900">Offres recommandées</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Basées sur votre profil</p>
+        </div>
+        <a routerLink="/jobs" class="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
+          Voir tout
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+          </svg>
+        </a>
+      </div>
 
-    </button>
+      <!-- ── Carte offre — remplacer le bloc ci-dessous par *ngFor sur tes vraies offres ── -->
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:border-blue-200 hover:shadow-md transition-all group">
+        <div class="flex gap-4">
 
-  </div>
+          <!-- Logo entreprise placeholder -->
+          <div class="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>
+            </svg>
+          </div>
 
-  <!-- JOB FEED -->
-  <div class="lg:col-span-2 space-y-4">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <h3 class="text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  Titre de l'offre
+                </h3>
+                <p class="text-xs text-slate-500 mt-0.5">Entreprise · Lieu</p>
+              </div>
+              <span class="text-xs text-slate-400 flex-shrink-0 mt-0.5">Il y a 2j</span>
+            </div>
 
-    <div class="bg-white p-6 rounded-2xl shadow">
+            <!-- Badges -->
+            <div class="flex flex-wrap gap-1.5 mt-3">
+              <span class="inline-flex items-center text-xs px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 font-medium">CDI</span>
+              <span class="inline-flex items-center text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-medium">Télétravail</span>
+              <span class="inline-flex items-center text-xs px-2.5 py-1 rounded-full bg-slate-50 text-slate-600 border border-slate-100">Paris</span>
+            </div>
 
-      <h2 class="font-semibold text-lg">
-        Offres recommandées
-      </h2>
-
-      <p class="text-gray-500 text-sm">
-        Basé sur votre profil
-      </p>
+            <!-- CTA -->
+            <div class="flex items-center justify-end mt-4 pt-3 border-t border-slate-50">
+              <a routerLink="/jobs/1"
+                 class="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 hover:text-blue-700 border border-blue-200 hover:border-blue-300 px-3 py-1.5 rounded-lg transition-colors">
+                Voir l'offre
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ── Fin carte offre ── -->
 
     </div>
-
   </div>
-
 </div>

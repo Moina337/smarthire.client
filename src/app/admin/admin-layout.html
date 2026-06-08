@@ -1,0 +1,36 @@
+<section class="min-h-screen bg-slate-50 text-slate-800">
+  <div class="mx-auto flex max-w-7xl flex-col gap-6 p-6 lg:p-8">
+    <header class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="text-sm uppercase tracking-[0.35em] text-blue-600">SmartHire Admin</p>
+          <h1 class="mt-2 text-3xl font-semibold text-slate-900">Centre d’administration</h1>
+          <p class="mt-2 text-slate-500">Pilotage des offres, candidats et candidatures en un seul espace.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <nav class="flex flex-wrap gap-2">
+            @for (item of links; track item.path) {
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="bg-blue-600 text-white shadow"
+                class="rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+              >
+                {{ item.label }}
+              </a>
+            }
+          </nav>
+          <button
+            (click)="logout()"
+            class="rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
+          >
+            Déconnexion
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</section>

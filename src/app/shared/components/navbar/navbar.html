@@ -14,40 +14,25 @@
             </a>
 
             <!-- DESKTOP MENU -->
-            <div
-                class="hidden md:flex items-center gap-6">
+            <div class="hidden md:flex items-center gap-6">
 
-                <a
-                    routerLink="/"
-                    class="text-gray-600 hover:text-blue-600 transition">
+                <a routerLink="/" class="text-gray-600 hover:text-blue-600 transition">Accueil</a>
 
-                    Accueil
+                <a routerLink="/jobs" class="text-gray-600 hover:text-blue-600 transition">Offres</a>
 
-                </a>
+                @if(isAdmin){
+                  <a routerLink="/admin" class="text-gray-600 hover:text-blue-600 transition">Admin</a>
+                }
 
-                <a
-                    routerLink="/jobs"
-                    class="text-gray-600 hover:text-blue-600 transition">
+                @if(!isLogged){
+                  <a routerLink="/register" class="text-gray-600 hover:text-blue-600 transition">Inscription</a>
+                  <a routerLink="/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">Connexion</a>
+                }
 
-                    Offres
-
-                </a>
-
-                <a
-                    routerLink="/login"
-                    class="text-gray-600 hover:text-blue-600 transition">
-
-                    Connexion
-
-                </a>
-
-                <a
-                    routerLink="/login"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
-
-                   Connexion
-
-                </a>
+                @if(isLogged){
+                  <a routerLink="/candidate/profile" class="text-gray-600 hover:text-blue-600 transition">Mon profil</a>
+                  <button (click)="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">Déconnexion</button>
+                }
 
             </div>
 
@@ -65,40 +50,20 @@
         <!-- MOBILE MENU -->
         @if(menuOpen){
 
-        <div
-            class="md:hidden flex flex-col gap-4 py-4 border-t">
+        <div class="md:hidden flex flex-col gap-4 py-4 border-t">
 
-            <a
-                routerLink="/"
-                class="text-gray-600">
+            <a routerLink="/" class="text-gray-600">Accueil</a>
+            <a routerLink="/jobs" class="text-gray-600">Offres</a>
 
-                Accueil
+            @if(!isLogged){
+              <a routerLink="/login" class="text-gray-600">Connexion</a>
+              <a routerLink="/register" class="text-blue-600">Inscription</a>
+            }
 
-            </a>
-
-            <a
-                routerLink="/jobs"
-                class="text-gray-600">
-
-                Offres
-
-            </a>
-
-            <a
-                routerLink="/login"
-                class="text-gray-600">
-
-                Connexion
-
-            </a>
-
-            <a
-                routerLink="/register"
-                class="text-blue-600">
-
-                Inscription
-
-            </a>
+            @if(isLogged){
+              <a routerLink="/candidate/profile" class="text-gray-600">Mon profil</a>
+              <button (click)="logout()" class="text-left text-red-500">Déconnexion</button>
+            }
 
         </div>
 

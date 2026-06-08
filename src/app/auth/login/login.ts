@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service'; 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class Login {
   constructor(
     private authService: AuthService,
     private router: Router
+    , private activatedRoute: ActivatedRoute
   ) {}
 
   login() {
@@ -40,7 +42,13 @@ export class Login {
           this.authService
             .saveToken(res.token);
 
-          this.router.navigate(['/candidate/profile']);
+          const redirect =
+            this.activatedRoute.snapshot
+              .queryParamMap.get('redirect');
+
+          this.router.navigate([
+            redirect || this.authService.redirectAfterLogin()
+          ]);
         },
 
         error: err => {
@@ -48,5 +56,9 @@ export class Login {
         }
 
       });
+  }
+
+  loginWithGoogle() {
+    this.authService.loginWithGoogle();
   }
 }
